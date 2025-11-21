@@ -5,7 +5,7 @@ import numpy as np
 from joblib import load
 
 # Charger le modèle
-pipeline = load("pipeline_prix_vente_terrains.joblib")
+saved = load("pipeline_prix_vente_terrains.joblib")
 
 app = FastAPI(title="Land Price Predictor")
 
@@ -28,6 +28,7 @@ def predict_price(data: InputData):
     df = pd.DataFrame([data.dict()])
 
     # Prédiction
+    pipeline = saved['best_model_']
     pred = pipeline.predict(df)[0]
 
     return {"prediction": float(pred)}
