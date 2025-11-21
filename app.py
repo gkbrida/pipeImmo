@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import pandas as pd
 import numpy as np
 from joblib import load
+from typing import List
 
 
 # Charger le modèle sauvegardé
