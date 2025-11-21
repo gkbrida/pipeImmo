@@ -7,7 +7,7 @@ from typing import List
 from sklearn.ensemble import IsolationForest
 from typing import Optional, List
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.metrics import mean_squared_error,
+from sklearn.metrics import mean_squared_error
 
 
 def rmse(y_true, y_pred):
