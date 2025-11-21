@@ -22,7 +22,7 @@ class InputData(BaseModel):
     prix_q3: float
     variance_prix: float
 
-@app.post("/predict")
+@app.post("/")
 def predict_price(data: InputData):
     # Convertir en DataFrame avec une seule ligne
     df = pd.DataFrame([data.dict()])
