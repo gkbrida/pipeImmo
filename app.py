@@ -3,17 +3,14 @@ from pydantic import BaseModel
 import pandas as pd
 import numpy as np
 from joblib import load
-from typing import List
 
+# Charger le modèle
+pipeline = load("pipeline_prix_vente_terrains.joblib")
 
-# Charger le modèle sauvegardé
-pipeline = load("pipeline_prix_vente_terrains.joblib")  # ton pipeline RealEstatePipeline
-
-app = FastAPI(title="land Price Predictor")
+app = FastAPI(title="Land Price Predictor")
 
 # Définition des entrées
 class InputData(BaseModel):
-    # toutes les colonnes features requises
     superficie_m2: float
     titreFoncier: int
     acces: int
@@ -26,9 +23,11 @@ class InputData(BaseModel):
     variance_prix: float
 
 @app.post("/predict")
-def predict_price(data: List[InputData]):
-    # Convertir en DataFrame
-    df = pd.DataFrame([d.dict() for d in data])
+def predict_price(data: InputData):
+    # Convertir en DataFrame avec une seule ligne
+    df = pd.DataFrame([data.dict()])
+
     # Prédiction
-    preds = pipeline.predict(df)
-    return {"predictions": preds.tolist()}
+    pred = pipeline.predict(df)[0]
+
+    return {"prediction": float(pred)}
