@@ -6,34 +6,16 @@ from joblib import load
 from typing import List
 
 # Charger le modèle sauvegardé
-pipeline = load("pipeline_prix_immobilier.joblib")  # ton pipeline RealEstatePipeline
+pipeline = load("pipeline_prix_vente_terrains.joblib")  # ton pipeline RealEstatePipeline
 
-app = FastAPI(title="Real Estate Price Predictor")
+app = FastAPI(title="land Price Predictor")
 
 # Définition des entrées
 class InputData(BaseModel):
     # toutes les colonnes features requises
     superficie_m2: float
-    nombre_pieces: int
-    nombre_salles_bain: int
-    jardin: int
-    piscine: int
-    parking: int
-    terrasse: int
-    cuisineEquipee: int
-    securisee: int
-    standing: int
-    balcon: int
-    cite: int
-    ascenseur: int
     titreFoncier: int
-    magasin: int
     acces: int
-    meuble: int
-    non_finition: int
-    basse: int
-    duplex: int
-    triplex: int
     prix_moyen: float
     prix_min: float
     prix_max: float
